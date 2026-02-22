@@ -145,3 +145,8 @@ body::before {
 .pulse-neon {
   animation: pulse-neon 2s ease-in-out infinite;
 }
+
+@keyframes posterScan {
+  0%   { top: -5%; }
+  100% { top: 105%; }
+}

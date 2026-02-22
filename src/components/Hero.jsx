@@ -271,17 +271,17 @@ export default function Hero() {
         </div>
 
         {/* Scan line animation */}
-        <motion.div
-          animate={{ top: ['−10%', '110%'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear', repeatDelay: 2 }}
+        <div
           style={{
             position: 'absolute',
             left: 0,
             right: 0,
+            top: '-5%',
             height: '2px',
             background: 'linear-gradient(90deg, transparent, rgba(0,245,255,0.4), transparent)',
             boxShadow: '0 0 10px rgba(0,245,255,0.3)',
             pointerEvents: 'none',
+            animation: 'posterScan 3s linear 2s infinite',
           }}
         />
       </motion.div>

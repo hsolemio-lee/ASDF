@@ -1,4 +1,3 @@
-import './index.css'
 import Hero from './components/Hero'
 import Setlist from './components/Setlist'
 import Members from './components/Members'

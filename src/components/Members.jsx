@@ -1,19 +1,44 @@
 import { members } from '../data'
+import { useInView } from '../hooks/useInView'
+
+const E = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
 export default function Members() {
+  const [titleRef, titleIn] = useInView()
+  const [gridRef,  gridIn]  = useInView()
+
   return (
-    <section className="content-section" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-      <div className="section-eyebrow">MEMBERS</div>
-      <div className="section-sub">ASDF Band &middot; 5 Members</div>
+    <section
+      className="content-section"
+      style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+    >
+      <div
+        ref={titleRef}
+        style={{ opacity: titleIn ? undefined : 0 }}
+      >
+        <div
+          className="section-eyebrow"
+          style={titleIn ? { animation: `fadeInUp 0.8s ${E} 0ms both` } : {}}
+        >
+          MEMBERS
+        </div>
+        <div
+          className="section-sub"
+          style={titleIn ? { animation: `fadeInUp 0.8s ${E} 80ms both` } : {}}
+        >
+          ASDF Band &middot; 5 Members
+        </div>
+      </div>
 
       <div
+        ref={gridRef}
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
           gap: 14,
         }}
       >
-        {members.map((m) => (
+        {members.map((m, i) => (
           <div
             key={m.nickname}
             style={{
@@ -24,6 +49,9 @@ export default function Members() {
               position: 'relative',
               overflow: 'hidden',
               transition: 'border-color 0.25s, box-shadow 0.25s',
+              ...(gridIn
+                ? { animation: `fadeInScale 0.7s ${E} ${i * 90}ms both` }
+                : { opacity: 0 }),
             }}
             onMouseEnter={e => {
               e.currentTarget.style.borderColor = `${m.color}66`

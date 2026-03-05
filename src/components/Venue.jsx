@@ -1,22 +1,48 @@
 import { concert } from '../data'
+import { useInView } from '../hooks/useInView'
+
+const E = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
 export default function Venue() {
+  const [titleRef, titleIn] = useInView()
+  const [boxRef,   boxIn]   = useInView()
+  const [gridRef,  gridIn]  = useInView()
+
   return (
     <section
       className="content-section"
       style={{ borderTop: '1px solid rgba(255,255,255,0.04)', textAlign: 'center' }}
     >
-      <div className="section-eyebrow">{'\uc624\uc2dc\ub294 \uae38'}</div>
-      <div className="section-sub">Location &middot; {concert.date}</div>
+      <div
+        ref={titleRef}
+        style={{ opacity: titleIn ? undefined : 0 }}
+      >
+        <div
+          className="section-eyebrow"
+          style={titleIn ? { animation: `fadeInUp 0.8s ${E} 0ms both` } : {}}
+        >
+          {'\uc624\uc2dc\ub294 \uae38'}
+        </div>
+        <div
+          className="section-sub"
+          style={titleIn ? { animation: `fadeInUp 0.8s ${E} 80ms both` } : {}}
+        >
+          Location &middot; {concert.date}
+        </div>
+      </div>
 
       {/* Venue box */}
       <div
+        ref={boxRef}
         style={{
           padding: '36px 28px',
           background: 'rgba(255,255,255,0.03)',
           border: '1px solid rgba(255,255,255,0.07)',
           borderRadius: 8,
           marginBottom: 20,
+          ...(boxIn
+            ? { animation: `fadeInUp 0.85s ${E} 0ms both` }
+            : { opacity: 0 }),
         }}
       >
         <div
@@ -55,11 +81,14 @@ export default function Venue() {
       </div>
 
       {/* Date / Time grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 48 }}>
+      <div
+        ref={gridRef}
+        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 48 }}
+      >
         {[
           { label: 'DATE', value: concert.date },
           { label: 'TIME', value: concert.time },
-        ].map(({ label, value }) => (
+        ].map(({ label, value }, i) => (
           <div
             key={label}
             style={{
@@ -67,6 +96,9 @@ export default function Venue() {
               background: 'rgba(255,140,0,0.07)',
               border: '1px solid rgba(255,140,0,0.18)',
               borderRadius: 6,
+              ...(gridIn
+                ? { animation: `fadeInScale 0.7s ${E} ${i * 100}ms both` }
+                : { opacity: 0 }),
             }}
           >
             <div

@@ -8,6 +8,12 @@ const LIGHTS = [
   { x: '72%', color: 'rgba(255, 210, 0, 0.22)',    w: '42%', h: '40%' },
 ]
 
+const E = 'cubic-bezier(0.22, 1, 0.36, 1)'
+
+function heroAnim(delay) {
+  return { animation: `heroIn 0.9s ${E} ${delay}ms both` }
+}
+
 export default function Hero() {
   return (
     <section
@@ -32,7 +38,7 @@ export default function Hero() {
           background: LIGHTS.map(
             l => `radial-gradient(ellipse ${l.w} ${l.h} at ${l.x} 0%, ${l.color} 0%, transparent 65%)`
           ).join(', '),
-          animation: 'stagePulse 5s ease-in-out infinite',
+          animation: `stagePulse 5s ease-in-out infinite`,
           pointerEvents: 'none',
         }}
       />
@@ -51,6 +57,7 @@ export default function Hero() {
           letterSpacing: '2px',
           color: 'rgba(255,255,255,0.55)',
           zIndex: 2,
+          ...heroAnim(0),
         }}
       >
         <span>{concert.date}</span>
@@ -72,6 +79,7 @@ export default function Hero() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
             filter: 'drop-shadow(0 0 24px rgba(255,140,0,0.65))',
+            ...heroAnim(120),
           }}
         >
           asdf
@@ -87,13 +95,14 @@ export default function Hero() {
             textShadow: '0 0 18px rgba(255,215,0,0.5)',
             marginTop: -4,
             marginBottom: 20,
+            ...heroAnim(260),
           }}
         >
           &#9889; 1st Live &#9889;
         </div>
 
         {/* Divider */}
-        <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,140,0,0.5), transparent)', marginBottom: 20 }} />
+        <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,140,0,0.5), transparent)', marginBottom: 20, ...heroAnim(340) }} />
 
         {/* Main title */}
         <div
@@ -104,6 +113,7 @@ export default function Hero() {
             letterSpacing: '4px',
             color: '#FFFFFF',
             textShadow: '0 0 40px rgba(255,255,255,0.18)',
+            ...heroAnim(400),
           }}
         >
           ASDF 1st Live
@@ -118,13 +128,14 @@ export default function Hero() {
             color: 'rgba(255,255,255,0.35)',
             marginTop: 6,
             marginBottom: 28,
+            ...heroAnim(480),
           }}
         >
           ROCKERS GARDEN
         </div>
 
         {/* Divider */}
-        <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,140,0,0.35), transparent)', marginBottom: 28 }} />
+        <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,140,0,0.35), transparent)', marginBottom: 28, ...heroAnim(520) }} />
 
         {/* Venue KO */}
         <div
@@ -134,6 +145,7 @@ export default function Hero() {
             letterSpacing: '-1px',
             color: '#FFFFFF',
             lineHeight: 1.05,
+            ...heroAnim(600),
           }}
         >
           {concert.venue}
@@ -148,6 +160,7 @@ export default function Hero() {
             color: '#00CFFF',
             textShadow: '0 0 22px rgba(0,207,255,0.55)',
             margin: '6px 0',
+            ...heroAnim(700),
           }}
         >
           {concert.code}
@@ -161,6 +174,7 @@ export default function Hero() {
             color: '#FFD700',
             letterSpacing: '1px',
             margin: '14px 0 6px',
+            ...heroAnim(800),
           }}
         >
           {concert.tagline}
@@ -172,6 +186,7 @@ export default function Hero() {
             fontSize: 13,
             color: 'rgba(255,255,255,0.42)',
             letterSpacing: '0.5px',
+            ...heroAnim(880),
           }}
         >
           {'\uc7a5\uc18c'} : {concert.address}
@@ -190,7 +205,7 @@ export default function Hero() {
           fontSize: 11,
           letterSpacing: '3px',
           color: 'rgba(255,255,255,0.28)',
-          animation: 'bounce 2s ease-in-out infinite',
+          animation: `bounce 2s ease-in-out 1.2s infinite, heroIn 0.9s ${E} 1s both`,
           zIndex: 2,
         }}
       >

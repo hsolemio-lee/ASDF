@@ -45,7 +45,7 @@ export default function Comments() {
       .insert({ nickname: trimNick, message: trimMsg })
 
     if (err) {
-      setError('저장 중 오류가 발생했어요. 다시 시도해주세요.')
+      setError(`오류: ${err.message}`)
     } else {
       setNickname('')
       setMessage('')

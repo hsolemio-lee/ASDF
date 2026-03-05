@@ -29,7 +29,7 @@ export default function Members() {
       if (!el) return null
       const o = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) activate(i) },
-        { threshold: 0.35 }
+        { threshold: 0, rootMargin: '-32% 0px -32% 0px' }
       )
       o.observe(el)
       return o
@@ -86,8 +86,8 @@ export default function Members() {
                 background: `linear-gradient(135deg, ${m.color}${isGlow ? '1c' : '0d'} 0%, transparent 100%)`,
                 position: 'relative',
                 overflow: 'hidden',
-                scale: isGlow ? '1.03' : '1',
-                transition: 'border-color 0.3s, box-shadow 0.5s, background 0.4s, scale 0.3s',
+                scale: isGlow ? '1.02' : '0.95',
+                transition: 'border-color 0.3s, box-shadow 0.5s, background 0.4s, scale 0.4s',
                 boxShadow: isGlow
                   ? `0 0 48px ${m.color}55, 0 0 12px ${m.color}33`
                   : isHover

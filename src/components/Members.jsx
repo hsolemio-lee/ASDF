@@ -26,7 +26,7 @@ export default function Members() {
           className="section-sub"
           style={titleIn ? { animation: `fadeInUp 0.8s ${E} 80ms both` } : {}}
         >
-          ASDF Band &middot; 5 Members
+          ASDF Band &middot; {members.length} Members
         </div>
       </div>
 
@@ -85,7 +85,7 @@ export default function Members() {
                 marginBottom: 8,
               }}
             >
-              {m.role}
+              {m.secret ? '??????' : m.role}
             </div>
 
             <div
@@ -95,11 +95,27 @@ export default function Members() {
                 letterSpacing: '2px',
                 color: '#FFFFFF',
                 lineHeight: 1.1,
-                marginBottom: 10,
+                marginBottom: 4,
+                filter: m.secret ? 'blur(8px)' : undefined,
+                userSelect: m.secret ? 'none' : undefined,
               }}
             >
               {m.nickname}
             </div>
+
+            {!m.secret && (
+              <div
+                style={{
+                  fontSize: 11,
+                  letterSpacing: '1px',
+                  color: 'rgba(255,255,255,0.35)',
+                  marginBottom: 10,
+                  fontFamily: "'Noto Sans KR', sans-serif",
+                }}
+              >
+                {m.name}
+              </div>
+            )}
 
             <div
               style={{
@@ -107,10 +123,50 @@ export default function Members() {
                 color: 'rgba(255,255,255,0.45)',
                 fontStyle: 'italic',
                 fontFamily: "'Noto Sans KR', sans-serif",
+                filter: m.secret ? 'blur(6px)' : undefined,
+                userSelect: m.secret ? 'none' : undefined,
               }}
             >
               {m.desc}
             </div>
+
+            {m.secret && (
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 6,
+                  background: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px)',
+                  zIndex: 10,
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 32,
+                    letterSpacing: '10px',
+                    color: m.color,
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    textShadow: `0 0 12px ${m.color}88`,
+                  }}
+                >
+                  ???
+                </div>
+                <div
+                  style={{
+                    fontSize: 9,
+                    letterSpacing: '4px',
+                    color: 'rgba(255,255,255,0.3)',
+                    fontWeight: 700,
+                  }}
+                >
+                  CLASSIFIED
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -3,9 +3,41 @@ import { useInView } from '../hooks/useInView'
 
 const E = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
-const MAP_URL =
-  'https://map.naver.com/v5/search/' +
-  encodeURIComponent('서울 강남구 도곡로4길 5 록커스가든')
+const ADDR = '서울 강남구 도곡로4길 5 록커스가든'
+
+const MAP_LINKS = [
+  {
+    label: '네이버 지도',
+    url: 'https://map.naver.com/v5/search/' + encodeURIComponent(ADDR),
+    bg: '#03C75A',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+        <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
+      </svg>
+    ),
+  },
+  {
+    label: '카카오맵',
+    url: 'https://map.kakao.com/?q=' + encodeURIComponent(ADDR),
+    bg: '#FEE500',
+    color: '#3C1E1E',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#3C1E1E" aria-hidden="true">
+        <path d="M12 2C6.477 2 2 5.925 2 10.773c0 3.076 1.76 5.78 4.418 7.414L5.5 22l4.674-2.463C10.731 19.838 11.36 19.9 12 19.9c5.523 0 10-3.925 10-8.773C22 5.925 17.523 2 12 2z"/>
+      </svg>
+    ),
+  },
+  {
+    label: 'T맵',
+    url: 'https://tmap.life/' + encodeURIComponent(ADDR),
+    bg: '#E8002D',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+      </svg>
+    ),
+  },
+]
 
 export default function Venue() {
   const [titleRef, titleIn] = useInView()
@@ -84,41 +116,43 @@ export default function Venue() {
           {concert.address}
         </div>
 
-        {/* Naver Map button */}
-        <a
-          href={MAP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
-            padding: '12px 24px',
-            background: '#03C75A',
-            color: '#FFFFFF',
-            fontFamily: "'Noto Sans KR', sans-serif",
-            fontWeight: 700,
-            fontSize: 14,
-            letterSpacing: '0.5px',
-            borderRadius: 6,
-            textDecoration: 'none',
-            transition: 'filter 0.2s, transform 0.15s',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.filter = 'brightness(1.15)'
-            e.currentTarget.style.transform = 'translateY(-2px)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.filter = 'brightness(1)'
-            e.currentTarget.style.transform = 'translateY(0)'
-          }}
-        >
-          {/* Naver N icon SVG */}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-            <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
-          </svg>
-          네이버 지도로 보기
-        </a>
+        {/* Map buttons */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
+          {MAP_LINKS.map(({ label, url, bg, color = '#FFFFFF', icon }) => (
+            <a
+              key={label}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '12px 20px',
+                background: bg,
+                color,
+                fontFamily: "'Noto Sans KR', sans-serif",
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: '0.5px',
+                borderRadius: 6,
+                textDecoration: 'none',
+                transition: 'filter 0.2s, transform 0.15s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.filter = 'brightness(1.12)'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.filter = 'brightness(1)'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
+            >
+              {icon}
+              {label}
+            </a>
+          ))}
+        </div>
       </div>
 
       {/* Date / Time grid */}

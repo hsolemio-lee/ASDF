@@ -374,7 +374,7 @@ export default function Members() {
                 <div style={isExpanded ? { minWidth: 220 } : {}}>
                   <div
                     style={{
-                      fontSize: 10,
+                      fontSize: 12,
                       letterSpacing: '3px',
                       color: m.color,
                       fontWeight: 700,
@@ -403,11 +403,12 @@ export default function Members() {
                   {!m.secret && (
                     <div
                       style={{
-                        fontSize: 11,
+                        fontSize: 14,
                         letterSpacing: '1px',
-                        color: 'rgba(255,255,255,0.35)',
+                        color: 'rgba(255,255,255,0.75)',
                         marginBottom: 10,
                         fontFamily: "'Noto Sans KR', sans-serif",
+                        fontWeight: 600,
                       }}
                     >
                       {m.name}

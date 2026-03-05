@@ -85,7 +85,7 @@ export const members = [
     nickname: 'INTERRUPT',
     role: '바이올린',
     color: '#C0C0C0',
-    desc: 'try { 공연 } catch { 차지민 }',
+    desc: "import { 차지민 } from 'FORK'",
     secret: true,
   },
 ]

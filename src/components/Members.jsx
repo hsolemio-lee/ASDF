@@ -86,7 +86,8 @@ export default function Members() {
                 background: `linear-gradient(135deg, ${m.color}${isGlow ? '1c' : '0d'} 0%, transparent 100%)`,
                 position: 'relative',
                 overflow: 'hidden',
-                transition: 'border-color 0.3s, box-shadow 0.5s, background 0.4s',
+                scale: isGlow ? '1.03' : '1',
+                transition: 'border-color 0.3s, box-shadow 0.5s, background 0.4s, scale 0.3s',
                 boxShadow: isGlow
                   ? `0 0 48px ${m.color}55, 0 0 12px ${m.color}33`
                   : isHover

@@ -3,6 +3,10 @@ import { useInView } from '../hooks/useInView'
 
 const E = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
+const MAP_URL =
+  'https://map.naver.com/v5/search/' +
+  encodeURIComponent('서울 강남구 도곡로4길 5 록커스가든')
+
 export default function Venue() {
   const [titleRef, titleIn] = useInView()
   const [boxRef,   boxIn]   = useInView()
@@ -21,7 +25,7 @@ export default function Venue() {
           className="section-eyebrow"
           style={titleIn ? { animation: `fadeInUp 0.8s ${E} 0ms both` } : {}}
         >
-          {'\uc624\uc2dc\ub294 \uae38'}
+          오시는 길
         </div>
         <div
           className="section-sub"
@@ -74,10 +78,47 @@ export default function Venue() {
             fontSize: 15,
             color: 'rgba(255,255,255,0.55)',
             lineHeight: 1.7,
+            marginBottom: 24,
           }}
         >
           {concert.address}
         </div>
+
+        {/* Naver Map button */}
+        <a
+          href={MAP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '12px 24px',
+            background: '#03C75A',
+            color: '#FFFFFF',
+            fontFamily: "'Noto Sans KR', sans-serif",
+            fontWeight: 700,
+            fontSize: 14,
+            letterSpacing: '0.5px',
+            borderRadius: 6,
+            textDecoration: 'none',
+            transition: 'filter 0.2s, transform 0.15s',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.filter = 'brightness(1.15)'
+            e.currentTarget.style.transform = 'translateY(-2px)'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.filter = 'brightness(1)'
+            e.currentTarget.style.transform = 'translateY(0)'
+          }}
+        >
+          {/* Naver N icon SVG */}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
+          </svg>
+          네이버 지도로 보기
+        </a>
       </div>
 
       {/* Date / Time grid */}

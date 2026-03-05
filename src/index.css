@@ -82,3 +82,34 @@ body {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ── Countdown ── */
+@keyframes countdownPulse {
+  0%, 100% { opacity: 1; text-shadow: 0 0 18px rgba(0,207,255,0.6); }
+  50%       { opacity: 0.85; text-shadow: 0 0 32px rgba(0,207,255,0.9); }
+}
+
+@keyframes colonBlink {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.08; }
+}
+
+/* ── Setlist lock / reveal ── */
+@keyframes redactFlicker {
+  0%, 90%, 100% { opacity: 1; }
+  92%           { opacity: 0.5; }
+  94%           { opacity: 0.9; }
+  96%           { opacity: 0.3; }
+  98%           { opacity: 0.85; }
+}
+
+@keyframes lockPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes revealTrack {
+  0%   { opacity: 0; transform: translateX(-20px); filter: blur(8px); }
+  60%  { filter: blur(0); }
+  100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+}

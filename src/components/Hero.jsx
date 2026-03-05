@@ -1,4 +1,5 @@
 import { concert } from '../data'
+import { useCountdown } from '../hooks/useCountdown'
 
 const LIGHTS = [
   { x: '8%',  color: 'rgba(0, 220, 100, 0.42)',   w: '68%', h: '58%' },
@@ -14,7 +15,39 @@ function heroAnim(delay) {
   return { animation: `heroIn 0.9s ${E} ${delay}ms both` }
 }
 
+function CountdownUnit({ value, label }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 56 }}>
+      <span
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: 'clamp(32px, 9vw, 52px)',
+          lineHeight: 1,
+          color: '#00CFFF',
+          textShadow: '0 0 18px rgba(0,207,255,0.6)',
+          animation: 'countdownPulse 1s ease-in-out infinite',
+          letterSpacing: '2px',
+        }}
+      >
+        {String(value).padStart(2, '0')}
+      </span>
+      <span
+        style={{
+          fontSize: 9,
+          letterSpacing: '2px',
+          color: 'rgba(255,255,255,0.35)',
+          marginTop: 4,
+          fontWeight: 700,
+        }}
+      >
+        {label}
+      </span>
+    </div>
+  )
+}
+
 export default function Hero() {
+  const { isUnlocked, d, h, m, s } = useCountdown()
   return (
     <section
       style={{
@@ -190,6 +223,93 @@ export default function Hero() {
           }}
         >
           {'\uc7a5\uc18c'} : {concert.address}
+        </div>
+
+        {/* Countdown */}
+        <div
+          style={{
+            marginTop: 36,
+            ...heroAnim(960),
+          }}
+        >
+          {isUnlocked ? (
+            <div
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 'clamp(22px, 6vw, 36px)',
+                letterSpacing: '6px',
+                color: '#00FF7F',
+                textShadow: '0 0 24px rgba(0,255,127,0.65)',
+                animation: 'stagePulse 1.5s ease-in-out infinite',
+              }}
+            >
+              &#9654; NOW LIVE
+            </div>
+          ) : (
+            <div>
+              <div
+                style={{
+                  fontSize: 10,
+                  letterSpacing: '4px',
+                  color: 'rgba(255,255,255,0.3)',
+                  marginBottom: 12,
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                }}
+              >
+                공연 시작까지
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  gap: 4,
+                }}
+              >
+                <CountdownUnit value={d} label="DAYS" />
+                <span
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: 'clamp(28px, 8vw, 46px)',
+                    color: 'rgba(0,207,255,0.4)',
+                    lineHeight: 1,
+                    paddingTop: 2,
+                    animation: 'colonBlink 1s step-end infinite',
+                  }}
+                >
+                  :
+                </span>
+                <CountdownUnit value={h} label="HRS" />
+                <span
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: 'clamp(28px, 8vw, 46px)',
+                    color: 'rgba(0,207,255,0.4)',
+                    lineHeight: 1,
+                    paddingTop: 2,
+                    animation: 'colonBlink 1s step-end infinite',
+                  }}
+                >
+                  :
+                </span>
+                <CountdownUnit value={m} label="MIN" />
+                <span
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: 'clamp(28px, 8vw, 46px)',
+                    color: 'rgba(0,207,255,0.4)',
+                    lineHeight: 1,
+                    paddingTop: 2,
+                    animation: 'colonBlink 1s step-end infinite',
+                  }}
+                >
+                  :
+                </span>
+                <CountdownUnit value={s} label="SEC" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

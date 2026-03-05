@@ -13,32 +13,28 @@ export default function Members() {
   const [cardKeys,  setCardKeys]  = useState(() => new Array(members.length).fill(0))
 
   const cardRefs = useRef([])
-  const timers   = useRef([])
 
-  const activate = useCallback((i) => {
+  const activate   = useCallback((i) => {
     setCardKeys(prev => prev.map((k, idx) => idx === i ? k + 1 : k))
     setGlowSet(prev => new Set([...prev, i]))
-    clearTimeout(timers.current[i])
-    timers.current[i] = setTimeout(() => {
-      setGlowSet(prev => { const s = new Set(prev); s.delete(i); return s })
-    }, 850)
+  }, [])
+
+  const deactivate = useCallback((i) => {
+    setGlowSet(prev => { const s = new Set(prev); s.delete(i); return s })
   }, [])
 
   useEffect(() => {
     const obs = cardRefs.current.map((el, i) => {
       if (!el) return null
       const o = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) activate(i) },
+        ([entry]) => { entry.isIntersecting ? activate(i) : deactivate(i) },
         { threshold: 0, rootMargin: '-32% 0px -32% 0px' }
       )
       o.observe(el)
       return o
     })
-    return () => {
-      obs.forEach(o => o?.disconnect())
-      timers.current.forEach(t => clearTimeout(t))
-    }
-  }, [activate])
+    return () => obs.forEach(o => o?.disconnect())
+  }, [activate, deactivate])
 
   return (
     <section

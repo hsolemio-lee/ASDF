@@ -43,7 +43,7 @@ export const members = [
     nickname: 'FORK',
     role: '기타 · 보컬',
     color: '#F7C325',
-    desc: '코드도 음도, 갈래가 많을수록 풍성해진다',
+    desc: 'git fork origin/soul — 나만의 브랜치로 산다',
   },
   {
     name: '고우리',
@@ -57,7 +57,7 @@ export const members = [
     nickname: 'ECHO',
     role: '키보드 · 보컬',
     color: '#FF69B4',
-    desc: '건반 위의 울림이 무대를 가득 채운다',
+    desc: 'echo $THOUGHTS | grep "집중" — no matches found',
   },
   {
     name: '김현민',
@@ -78,14 +78,14 @@ export const members = [
     nickname: 'GREP',
     role: '기타',
     color: '#20B2AA',
-    desc: '정확한 음만 골라내는 손가락',
+    desc: 'grep -r "완벽한 리프" . — 항상 매칭',
   },
   {
     name: '차지민',
     nickname: 'INTERRUPT',
     role: '바이올린',
     color: '#C0C0C0',
-    desc: '공연이 시작되어야 보이는 존재',
+    desc: 'try { 공연 } catch { 차지민 }',
     secret: true,
   },
 ]

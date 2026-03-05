@@ -68,18 +68,48 @@ export default function Venue() {
         </div>
       </div>
 
-      {/* Venue box */}
+      {/* Venue box + Poster */}
       <div
         ref={boxRef}
         style={{
+          display: 'flex',
+          gap: 20,
+          alignItems: 'stretch',
+          marginBottom: 20,
+          flexWrap: 'wrap',
+          ...(boxIn
+            ? { animation: `fadeInUp 0.85s ${E} 0ms both` }
+            : { opacity: 0 }),
+        }}
+      >
+        {/* Poster image */}
+        <div
+          style={{
+            flex: '0 0 auto',
+            width: 'clamp(160px, 28vw, 260px)',
+            borderRadius: 8,
+            overflow: 'hidden',
+            border: '1px solid rgba(255,140,0,0.25)',
+            boxShadow: '0 0 32px rgba(255,140,0,0.12)',
+          }}
+        >
+          <img
+            src="/poster.jpg"
+            alt="ASDF 1st Live 포스터"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        </div>
+
+      {/* Venue info */}
+      <div
+        style={{
+          flex: 1,
+          minWidth: 240,
           padding: '36px 28px',
           background: 'rgba(255,255,255,0.03)',
           border: '1px solid rgba(255,255,255,0.07)',
           borderRadius: 8,
-          marginBottom: 20,
-          ...(boxIn
-            ? { animation: `fadeInUp 0.85s ${E} 0ms both` }
-            : { opacity: 0 }),
+          textAlign: 'center',
         }}
       >
         <div
@@ -154,6 +184,7 @@ export default function Venue() {
             </a>
           ))}
         </div>
+      </div>
       </div>
 
       {/* Date / Time grid */}

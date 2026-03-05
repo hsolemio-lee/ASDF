@@ -57,7 +57,7 @@ export const members = [
     nickname: 'ECHO',
     role: '키보드 · 보컬',
     color: '#FF69B4',
-    desc: 'echo $SOUND | tee 심장',
+    desc: 'echo $THOUGHTS | grep "집중" — no matches found',
   },
   {
     name: '김현민',

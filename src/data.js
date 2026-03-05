@@ -69,7 +69,7 @@ export const members = [
   {
     name: '박정재',
     nickname: 'LOOP',
-    role: '드럼',
+    role: '창립자 · 단장 · 드럼',
     color: '#FF4444',
     desc: 'while(true) { rock(); }',
   },

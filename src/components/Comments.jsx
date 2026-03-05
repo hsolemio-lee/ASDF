@@ -24,6 +24,7 @@ export default function Comments() {
     const { data } = await supabase
       .from('comments')
       .select('*')
+      .is('member', null)
       .order('created_at', { ascending: false })
     if (data) setComments(data)
   }
@@ -79,13 +80,13 @@ export default function Comments() {
           className="section-eyebrow"
           style={titleIn ? { animation: `fadeInUp 0.8s ${E} 0ms both` } : {}}
         >
-          방명록
+          응원하기
         </div>
         <div
           className="section-sub"
           style={titleIn ? { animation: `fadeInUp 0.8s ${E} 80ms both` } : {}}
         >
-          Guestbook &middot; 응원 메시지를 남겨주세요
+          Cheers &middot; 공연 응원 메시지를 남겨주세요
         </div>
       </div>
 

@@ -1,22 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
 
-:root {
-  --neon-cyan: #00f5ff;
-  --neon-pink: #ff00aa;
-  --neon-green: #00ff88;
-  --neon-purple: #bf00ff;
-  --bg-primary: #050508;
-  --bg-secondary: #0a0a12;
-  --bg-card: #0d0d1a;
-  --text-primary: #e8e8f0;
-  --text-muted: #6060a0;
-  --border-dim: #1a1a2e;
-}
-
-* {
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+:root {
+  --orange: #FF8C00;
+  --yellow: #FFD700;
+  --green: #00FF7F;
+  --cyan: #00CFFF;
+  --purple: #9B4DFF;
+  --red: #FF4444;
+  --bg: #08050a;
+  --text: #F0F0F0;
 }
 
 html {
@@ -24,124 +22,42 @@ html {
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Rajdhani', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--neon-cyan);
-  border-radius: 2px;
-  box-shadow: 0 0 6px var(--neon-cyan);
+.content-section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 88px 24px;
 }
 
-.mono {
-  font-family: 'Share Tech Mono', monospace;
+.section-eyebrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.4rem, 8vw, 3.8rem);
+  letter-spacing: 6px;
+  text-align: center;
+  margin-bottom: 6px;
 }
 
-.orbitron {
-  font-family: 'Orbitron', monospace;
+.section-sub {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 48px;
 }
 
-/* Scanline overlay */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 245, 255, 0.015) 2px,
-    rgba(0, 245, 255, 0.015) 4px
-  );
-  pointer-events: none;
-  z-index: 9999;
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
 }
 
-/* Neon text glow utilities */
-.glow-cyan {
-  text-shadow:
-    0 0 7px var(--neon-cyan),
-    0 0 21px var(--neon-cyan),
-    0 0 42px var(--neon-cyan);
-}
-
-.glow-pink {
-  text-shadow:
-    0 0 7px var(--neon-pink),
-    0 0 21px var(--neon-pink),
-    0 0 42px var(--neon-pink);
-}
-
-.glow-green {
-  text-shadow:
-    0 0 7px var(--neon-green),
-    0 0 21px var(--neon-green),
-    0 0 42px var(--neon-green);
-}
-
-/* Neon box glow */
-.border-glow-cyan {
-  box-shadow:
-    0 0 5px var(--neon-cyan),
-    0 0 20px rgba(0, 245, 255, 0.3),
-    inset 0 0 5px rgba(0, 245, 255, 0.05);
-  border: 1px solid rgba(0, 245, 255, 0.6);
-}
-
-.border-glow-pink {
-  box-shadow:
-    0 0 5px var(--neon-pink),
-    0 0 20px rgba(255, 0, 170, 0.3),
-    inset 0 0 5px rgba(255, 0, 170, 0.05);
-  border: 1px solid rgba(255, 0, 170, 0.6);
-}
-
-@keyframes flicker {
-  0%, 95%, 100% { opacity: 1; }
-  96% { opacity: 0.8; }
-  97% { opacity: 1; }
-  98% { opacity: 0.6; }
-  99% { opacity: 1; }
-}
-
-@keyframes pulse-neon {
+@keyframes stagePulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes glitch-1 {
-  0%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
-  10% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 0); opacity: 1; }
-  30% { clip-path: inset(70% 0 5% 0); transform: translate(3px, 0); opacity: 1; }
-  50% { clip-path: inset(45% 0 40% 0); transform: translate(-2px, 0); opacity: 1; }
-  70% { clip-path: inset(5% 0 80% 0); transform: translate(2px, 0); opacity: 1; }
-  90% { clip-path: inset(0 0 100% 0); opacity: 0; }
-}
-
-@keyframes glitch-2 {
-  0%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; }
-  15% { clip-path: inset(55% 0 30% 0); transform: translate(3px, 0); opacity: 1; }
-  35% { clip-path: inset(10% 0 75% 0); transform: translate(-3px, 0); opacity: 1; }
-  55% { clip-path: inset(80% 0 5% 0); transform: translate(2px, 0); opacity: 1; }
-  75% { clip-path: inset(35% 0 55% 0); transform: translate(-2px, 0); opacity: 1; }
-}
-
-.flicker {
-  animation: flicker 4s infinite;
-}
-
-.pulse-neon {
-  animation: pulse-neon 2s ease-in-out infinite;
+  50% { opacity: 0.72; }
 }

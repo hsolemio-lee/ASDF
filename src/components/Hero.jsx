@@ -1,382 +1,202 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { concertInfo } from '../data/concertData';
+import { concert } from '../data'
 
-const CHARS = '!@#$%^&*()_+{}|:<>?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-
-function useGlitchText(finalText, delay = 0) {
-  const [displayed, setDisplayed] = useState('');
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    let startTimeout;
-    startTimeout = setTimeout(() => {
-      let iteration = 0;
-      const total = finalText.length * 3;
-      const interval = setInterval(() => {
-        const resolved = Math.floor(iteration / 3);
-        const scrambled = finalText
-          .split('')
-          .map((char, i) => {
-            if (char === ' ') return ' ';
-            if (i < resolved) return char;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          })
-          .join('');
-        setDisplayed(scrambled);
-        iteration++;
-        if (iteration > total) {
-          clearInterval(interval);
-          setDisplayed(finalText);
-          setDone(true);
-        }
-      }, 40);
-      return () => clearInterval(interval);
-    }, delay);
-    return () => clearTimeout(startTimeout);
-  }, [finalText, delay]);
-
-  return { displayed, done };
-}
-
-function NeonLine({ color = 'cyan' }) {
-  const colorMap = {
-    cyan: 'rgba(0,245,255,0.7)',
-    pink: 'rgba(255,0,170,0.7)',
-    green: 'rgba(0,255,136,0.7)',
-  };
-  const c = colorMap[color] || colorMap.cyan;
-  return (
-    <div
-      style={{
-        height: '1px',
-        background: `linear-gradient(90deg, transparent, ${c}, transparent)`,
-        boxShadow: `0 0 8px ${c}`,
-        margin: '12px 0',
-      }}
-    />
-  );
-}
-
-function InfoBlock({ label, value, color = 'cyan' }) {
-  const colorMap = {
-    cyan: { text: '#00f5ff', glow: 'rgba(0,245,255,0.8)' },
-    pink: { text: '#ff00aa', glow: 'rgba(255,0,170,0.8)' },
-    green: { text: '#00ff88', glow: 'rgba(0,255,136,0.8)' },
-  };
-  const c = colorMap[color] || colorMap.cyan;
-  return (
-    <div style={{ marginBottom: '16px' }}>
-      <div
-        className="mono"
-        style={{ fontSize: '10px', color: '#6060a0', letterSpacing: '3px', marginBottom: '4px' }}
-      >
-        {label}
-      </div>
-      <div
-        style={{
-          fontSize: '17px',
-          fontWeight: 700,
-          color: c.text,
-          textShadow: `0 0 8px ${c.glow}`,
-          letterSpacing: '1px',
-        }}
-      >
-        {value}
-      </div>
-    </div>
-  );
-}
+const LIGHTS = [
+  { x: '8%',  color: 'rgba(0, 220, 100, 0.42)',   w: '68%', h: '58%' },
+  { x: '50%', color: 'rgba(255, 140, 0, 0.48)',    w: '52%', h: '54%' },
+  { x: '92%', color: 'rgba(140, 50, 255, 0.42)',   w: '68%', h: '58%' },
+  { x: '28%', color: 'rgba(0, 180, 255, 0.30)',    w: '42%', h: '46%' },
+  { x: '72%', color: 'rgba(255, 210, 0, 0.22)',    w: '42%', h: '40%' },
+]
 
 export default function Hero() {
-  const { displayed: bandNameDisplay } = useGlitchText(concertInfo.bandName, 300);
-  const [scrollIndicator, setScrollIndicator] = useState(true);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 80) setScrollIndicator(false);
-      else setScrollIndicator(true);
-    };
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
     <section
       style={{
-        minHeight: '100vh',
+        minHeight: '100dvh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '40px 24px 80px',
         position: 'relative',
-        background: `
-          radial-gradient(ellipse at 20% 20%, rgba(0,245,255,0.06) 0%, transparent 60%),
-          radial-gradient(ellipse at 80% 80%, rgba(255,0,170,0.06) 0%, transparent 60%),
-          radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 0%, #050508 100%)
-        `,
         overflow: 'hidden',
+        padding: '80px 24px 60px',
+        background: '#08050a',
       }}
     >
-      {/* Background grid */}
+      {/* Stage lights */}
       <div
+        aria-hidden="true"
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: `
-            linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,245,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
+          background: LIGHTS.map(
+            l => `radial-gradient(ellipse ${l.w} ${l.h} at ${l.x} 0%, ${l.color} 0%, transparent 65%)`
+          ).join(', '),
+          animation: 'stagePulse 5s ease-in-out infinite',
           pointerEvents: 'none',
         }}
       />
 
-      {/* Corner decorations */}
-      {[
-        { top: 20, left: 20 },
-        { top: 20, right: 20 },
-        { bottom: 20, left: 20 },
-        { bottom: 20, right: 20 },
-      ].map((pos, i) => (
-        <div
-          key={i}
-          style={{
-            position: 'absolute',
-            width: '30px',
-            height: '30px',
-            ...pos,
-            borderTop: i < 2 ? '2px solid rgba(0,245,255,0.4)' : 'none',
-            borderBottom: i >= 2 ? '2px solid rgba(0,245,255,0.4)' : 'none',
-            borderLeft: i % 2 === 0 ? '2px solid rgba(0,245,255,0.4)' : 'none',
-            borderRight: i % 2 !== 0 ? '2px solid rgba(0,245,255,0.4)' : 'none',
-          }}
-        />
-      ))}
-
-      {/* Poster art area */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        style={{
-          width: '100%',
-          maxWidth: '360px',
-          aspectRatio: '3/4',
-          borderRadius: '4px',
-          marginBottom: '40px',
-          position: 'relative',
-          overflow: 'hidden',
-          border: '1px solid rgba(0,245,255,0.25)',
-          boxShadow: '0 0 40px rgba(0,245,255,0.1), 0 0 80px rgba(255,0,170,0.08)',
-        }}
-      >
-        {/* Gradient poster */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: `
-              radial-gradient(ellipse at 30% 30%, rgba(0,245,255,0.15) 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 70%, rgba(255,0,170,0.15) 0%, transparent 60%),
-              radial-gradient(ellipse at 50% 50%, rgba(191,0,255,0.08) 0%, transparent 70%),
-              linear-gradient(160deg, #070712 0%, #0a0520 50%, #07120a 100%)
-            `,
-          }}
-        />
-
-        {/* Poster inner content */}
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '32px 24px',
-            gap: '24px',
-          }}
-        >
-          {/* Circuit decoration top */}
-          <div className="mono" style={{ fontSize: '9px', color: 'rgba(0,245,255,0.4)', letterSpacing: '4px' }}>
-            [ LIVE PERFORMANCE ]
-          </div>
-
-          {/* Waveform visual */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '3px', height: '48px' }}>
-            {Array.from({ length: 24 }).map((_, i) => {
-              const h = [20, 35, 55, 70, 90, 75, 60, 80, 95, 70, 50, 40, 60, 85, 95, 75, 55, 70, 85, 60, 45, 30, 20, 15][i] || 30;
-              const isHighlight = i >= 8 && i <= 16;
-              return (
-                <div
-                  key={i}
-                  style={{
-                    width: '4px',
-                    height: `${h}%`,
-                    borderRadius: '2px',
-                    background: isHighlight
-                      ? 'linear-gradient(to top, #ff00aa, #00f5ff)'
-                      : 'rgba(0,245,255,0.3)',
-                    boxShadow: isHighlight ? '0 0 6px rgba(0,245,255,0.5)' : 'none',
-                  }}
-                />
-              );
-            })}
-          </div>
-
-          {/* Band name on poster */}
-          <div
-            className="orbitron"
-            style={{
-              fontSize: '28px',
-              fontWeight: 900,
-              color: '#00f5ff',
-              textAlign: 'center',
-              letterSpacing: '6px',
-              textShadow: '0 0 20px rgba(0,245,255,0.8), 0 0 40px rgba(0,245,255,0.4)',
-              lineHeight: 1.1,
-            }}
-          >
-            NULL<br />VECTOR
-          </div>
-
-          <div style={{ textAlign: 'center' }}>
-            <div
-              className="mono"
-              style={{ fontSize: '11px', color: 'rgba(255,0,170,0.8)', letterSpacing: '3px', marginBottom: '6px' }}
-            >
-              {concertInfo.date}
-            </div>
-            <div
-              style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', letterSpacing: '1px' }}
-            >
-              {concertInfo.venue}
-            </div>
-          </div>
-
-          {/* Bottom decoration */}
-          <div style={{
-            width: '100%',
-            height: '1px',
-            background: 'linear-gradient(90deg, transparent, rgba(255,0,170,0.6), transparent)',
-            boxShadow: '0 0 6px rgba(255,0,170,0.5)',
-          }} />
-
-          <div className="mono" style={{ fontSize: '9px', color: 'rgba(191,0,255,0.6)', letterSpacing: '3px' }}>
-            // A NIGHT OF SIGNAL &amp; NOISE
-          </div>
-        </div>
-
-        {/* Scan line animation */}
-        <motion.div
-          animate={{ top: ['−10%', '110%'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear', repeatDelay: 2 }}
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            height: '2px',
-            background: 'linear-gradient(90deg, transparent, rgba(0,245,255,0.4), transparent)',
-            boxShadow: '0 0 10px rgba(0,245,255,0.3)',
-            pointerEvents: 'none',
-          }}
-        />
-      </motion.div>
-
-      {/* Concert info */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        style={{ width: '100%', maxWidth: '360px' }}
-      >
-        {/* Band name title */}
-        <div style={{ marginBottom: '8px' }}>
-          <div
-            className="mono"
-            style={{ fontSize: '10px', color: '#6060a0', letterSpacing: '4px', marginBottom: '8px' }}
-          >
-            // BAND_NAME.exe
-          </div>
-          <h1
-            className="orbitron"
-            style={{
-              fontSize: '36px',
-              fontWeight: 900,
-              color: '#00f5ff',
-              letterSpacing: '4px',
-              textShadow: '0 0 15px rgba(0,245,255,0.7), 0 0 30px rgba(0,245,255,0.3)',
-              lineHeight: 1,
-            }}
-          >
-            {bandNameDisplay}
-          </h1>
-          <div
-            style={{
-              fontSize: '13px',
-              color: 'rgba(255,255,255,0.45)',
-              letterSpacing: '3px',
-              marginTop: '8px',
-              fontStyle: 'italic',
-            }}
-          >
-            {concertInfo.tagline}
-          </div>
-        </div>
-
-        <NeonLine color="cyan" />
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 24px', marginTop: '8px' }}>
-          <InfoBlock label="// DATE" value={concertInfo.date} color="cyan" />
-          <InfoBlock label="// TIME" value={concertInfo.time} color="pink" />
-          <InfoBlock label="// DOORS_OPEN" value={concertInfo.doorsOpen} color="green" />
-          <InfoBlock label="// TICKET" value={concertInfo.ticketPrice} color="cyan" />
-        </div>
-
-        <NeonLine color="pink" />
-
-        <InfoBlock label="// VENUE" value={concertInfo.venue} color="pink" />
-        <div
-          className="mono"
-          style={{ fontSize: '12px', color: '#6060a0', letterSpacing: '1px', marginTop: '-8px' }}
-        >
-          {concertInfo.address}
-        </div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        animate={{ opacity: scrollIndicator ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
+      {/* Date / Time */}
+      <div
         style={{
           position: 'absolute',
-          bottom: '32px',
-          left: '50%',
-          transform: 'translateX(-50%)',
+          top: 24,
+          left: 24,
+          right: 24,
+          display: 'flex',
+          justifyContent: 'space-between',
+          fontSize: 13,
+          fontWeight: 700,
+          letterSpacing: '2px',
+          color: 'rgba(255,255,255,0.55)',
+          zIndex: 2,
+        }}
+      >
+        <span>{concert.date}</span>
+        <span>{concert.time}</span>
+      </div>
+
+      {/* Main content */}
+      <div style={{ textAlign: 'center', width: '100%', maxWidth: 560, position: 'relative', zIndex: 2 }}>
+
+        {/* asdf logo */}
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 'clamp(72px, 22vw, 130px)',
+            lineHeight: 1,
+            letterSpacing: '-2px',
+            background: 'linear-gradient(175deg, #FFD700 0%, #FF8C00 55%, #FF5500 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            filter: 'drop-shadow(0 0 24px rgba(255,140,0,0.65))',
+          }}
+        >
+          asdf
+        </div>
+
+        {/* 1st Live badge */}
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 'clamp(22px, 6vw, 40px)',
+            letterSpacing: '6px',
+            color: '#FFD700',
+            textShadow: '0 0 18px rgba(255,215,0,0.5)',
+            marginTop: -4,
+            marginBottom: 20,
+          }}
+        >
+          &#9889; 1st Live &#9889;
+        </div>
+
+        {/* Divider */}
+        <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,140,0,0.5), transparent)', marginBottom: 20 }} />
+
+        {/* Main title */}
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 'clamp(44px, 13vw, 88px)',
+            lineHeight: 1,
+            letterSpacing: '4px',
+            color: '#FFFFFF',
+            textShadow: '0 0 40px rgba(255,255,255,0.18)',
+          }}
+        >
+          ASDF 1st Live
+        </div>
+
+        {/* Venue EN */}
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 'clamp(12px, 3.5vw, 20px)',
+            letterSpacing: '10px',
+            color: 'rgba(255,255,255,0.35)',
+            marginTop: 6,
+            marginBottom: 28,
+          }}
+        >
+          ROCKERS GARDEN
+        </div>
+
+        {/* Divider */}
+        <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,140,0,0.35), transparent)', marginBottom: 28 }} />
+
+        {/* Venue KO */}
+        <div
+          style={{
+            fontFamily: "'Black Han Sans', sans-serif",
+            fontSize: 'clamp(38px, 13vw, 76px)',
+            letterSpacing: '-1px',
+            color: '#FFFFFF',
+            lineHeight: 1.05,
+          }}
+        >
+          {concert.venue}
+        </div>
+
+        {/* Code */}
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 'clamp(26px, 8vw, 50px)',
+            letterSpacing: '8px',
+            color: '#00CFFF',
+            textShadow: '0 0 22px rgba(0,207,255,0.55)',
+            margin: '6px 0',
+          }}
+        >
+          {concert.code}
+        </div>
+
+        {/* Tagline */}
+        <div
+          style={{
+            fontSize: 'clamp(13px, 3.5vw, 17px)',
+            fontWeight: 700,
+            color: '#FFD700',
+            letterSpacing: '1px',
+            margin: '14px 0 6px',
+          }}
+        >
+          {concert.tagline}
+        </div>
+
+        {/* Address */}
+        <div
+          style={{
+            fontSize: 13,
+            color: 'rgba(255,255,255,0.42)',
+            letterSpacing: '0.5px',
+          }}
+        >
+          {'\uc7a5\uc18c'} : {concert.address}
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 24,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '6px',
-          pointerEvents: 'none',
+          gap: 4,
+          fontSize: 11,
+          letterSpacing: '3px',
+          color: 'rgba(255,255,255,0.28)',
+          animation: 'bounce 2s ease-in-out infinite',
+          zIndex: 2,
         }}
       >
-        <div className="mono" style={{ fontSize: '9px', color: 'rgba(0,245,255,0.5)', letterSpacing: '3px' }}>
-          SCROLL
-        </div>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-          style={{
-            width: '1px',
-            height: '32px',
-            background: 'linear-gradient(to bottom, rgba(0,245,255,0.6), transparent)',
-            boxShadow: '0 0 4px rgba(0,245,255,0.4)',
-          }}
-        />
-      </motion.div>
+        <span>SCROLL</span>
+        <span>&#9660;</span>
+      </div>
     </section>
-  );
+  )
 }

@@ -312,6 +312,28 @@ export default function Members() {
                 }}
               />
 
+              {/* Absent badge */}
+              {m.absent && (
+                <div
+                  aria-label="이번 공연 불참"
+                  style={{
+                    position: 'absolute',
+                    bottom: 12,
+                    right: 14,
+                    fontSize: 9,
+                    letterSpacing: '2px',
+                    color: 'rgba(255,255,255,0.55)',
+                    fontWeight: 700,
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.18)',
+                    borderRadius: 4,
+                    padding: '2px 7px',
+                  }}
+                >
+                  이번 공연 불참
+                </div>
+              )}
+
               {/* Expand hint */}
               {canExpand && !isExpanded && (
                 <div

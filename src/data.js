@@ -79,6 +79,15 @@ export const members = [
     role: '기타',
     color: '#20B2AA',
     desc: 'grep -r "완벽한 리프" . — 항상 매칭',
+    absent: true,
+  },
+  {
+    name: '박규민',
+    nickname: 'REBOOT',
+    role: '보컬 · 드럼',
+    color: '#FF6B6B',
+    desc: '막내지만 비트는 제일 세다 — youngest.exe',
+    absent: true,
   },
   {
     name: '차지민',

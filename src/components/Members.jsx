@@ -239,7 +239,8 @@ export default function Members() {
             titleIn
               ? {
                   animation: `fadeInUp 0.8s ${E} 160ms both`,
-                  marginTop: 10,
+                  marginTop: 20,
+                  marginBottom: 8,
                   fontSize: 13,
                   color: 'rgba(255,255,255,0.4)',
                   fontFamily: "'Noto Sans KR', sans-serif",

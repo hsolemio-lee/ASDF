@@ -44,6 +44,7 @@ export const members = [
     role: '기타 · 보컬',
     color: '#F7C325',
     desc: 'git fork origin/soul — 나만의 브랜치로 산다',
+    photo: '/이한솔.jpg',
   },
   {
     name: '고우리',
@@ -51,6 +52,7 @@ export const members = [
     role: '키보드 · 베이스 · 보컬',
     color: '#9B4DFF',
     desc: '주파수를 지배하는 자',
+    photo: '/고우리.jpg',
   },
   {
     name: '정현석',
@@ -58,6 +60,7 @@ export const members = [
     role: '키보드 · 보컬',
     color: '#FF69B4',
     desc: 'echo $THOUGHTS | grep "집중" — no matches found',
+    photo: '/정현석.jpg',
   },
   {
     name: '김현민',
@@ -65,6 +68,7 @@ export const members = [
     role: '베이스',
     color: '#00FF7F',
     desc: '비어있는 듯 꽉 찬 저음',
+    photo: '/김현민.jpg',
   },
   {
     name: '박정재',

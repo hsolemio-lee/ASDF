@@ -30,6 +30,7 @@ export const members = [
     role: '메인 보컬',
     color: '#FF8C00',
     desc: '코딩도 인생도 리셋이 답이다',
+    photo: '/김정용.jpg',
   },
   {
     name: '최철호',
@@ -37,6 +38,7 @@ export const members = [
     role: '기타',
     color: '#00CFFF',
     desc: '잃어버린 음을 찾아서',
+    photo: '/최철호.jpg',
   },
   {
     name: '이한솔',
@@ -83,6 +85,7 @@ export const members = [
     role: '기타',
     color: '#20B2AA',
     desc: 'grep -r "완벽한 리프" . — 항상 매칭',
+    photo: '/박정호.jpg',
     absent: true,
   },
   {

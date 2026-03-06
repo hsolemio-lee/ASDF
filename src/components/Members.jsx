@@ -395,7 +395,6 @@ export default function Members() {
                     <div
                       style={{
                         width: '100%',
-                        height: isExpanded ? 280 : 110,
                         borderRadius: 4,
                         overflow: 'hidden',
                         marginBottom: 16,
@@ -403,7 +402,6 @@ export default function Members() {
                         background: `${m.color}0d`,
                         border: `1px solid ${m.color}22`,
                         flexShrink: 0,
-                        transition: 'height 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
                       }}
                     >
                       {m.photo ? (
@@ -413,13 +411,11 @@ export default function Members() {
                             alt={m.name}
                             style={{
                               width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                              objectPosition: 'center top',
+                              height: 'auto',
                               display: 'block',
                             }}
                           />
-                          {/* Gradient overlay — smaller when expanded to show more photo */}
+                          {/* Gradient overlay at bottom */}
                           <div
                             aria-hidden="true"
                             style={{
@@ -427,10 +423,9 @@ export default function Members() {
                               bottom: 0,
                               left: 0,
                               right: 0,
-                              height: isExpanded ? '30%' : '60%',
+                              height: '30%',
                               background: 'linear-gradient(to bottom, transparent, rgba(8,5,10,0.88))',
                               pointerEvents: 'none',
-                              transition: 'height 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
                             }}
                           />
                           {/* Subtle color tint on sides */}

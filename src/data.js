@@ -78,6 +78,7 @@ export const members = [
     role: '창립자 · 단장 · 드럼',
     color: '#FF4444',
     desc: 'while(true) { rock(); }',
+    photo: '/박정재.jpg',
   },
   {
     name: '박정호',

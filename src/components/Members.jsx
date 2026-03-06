@@ -395,6 +395,7 @@ export default function Members() {
                     <div
                       style={{
                         width: '100%',
+                        height: isExpanded ? 360 : 170,
                         borderRadius: 4,
                         overflow: 'hidden',
                         marginBottom: 16,
@@ -402,6 +403,7 @@ export default function Members() {
                         background: `${m.color}0d`,
                         border: `1px solid ${m.color}22`,
                         flexShrink: 0,
+                        transition: 'height 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
                       }}
                     >
                       {m.photo ? (
@@ -411,11 +413,13 @@ export default function Members() {
                             alt={m.name}
                             style={{
                               width: '100%',
-                              height: 'auto',
+                              height: '100%',
+                              objectFit: 'cover',
+                              objectPosition: 'center top',
                               display: 'block',
                             }}
                           />
-                          {/* Gradient overlay at bottom */}
+                          {/* Gradient overlay — 접힌 상태에서 더 강하게 페이드 */}
                           <div
                             aria-hidden="true"
                             style={{
@@ -423,9 +427,10 @@ export default function Members() {
                               bottom: 0,
                               left: 0,
                               right: 0,
-                              height: '30%',
-                              background: 'linear-gradient(to bottom, transparent, rgba(8,5,10,0.88))',
+                              height: isExpanded ? '25%' : '50%',
+                              background: 'linear-gradient(to bottom, transparent, rgba(8,5,10,0.9))',
                               pointerEvents: 'none',
+                              transition: 'height 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
                             }}
                           />
                           {/* Subtle color tint on sides */}

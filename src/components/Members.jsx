@@ -389,6 +389,106 @@ export default function Members() {
               <div style={isExpanded ? { display: 'flex', gap: 40, alignItems: 'flex-start', flexWrap: 'wrap' } : {}}>
                 {/* Member info */}
                 <div style={isExpanded ? { minWidth: 220 } : {}}>
+
+                  {/* Photo / Avatar area */}
+                  {!m.secret && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: 152,
+                        borderRadius: 4,
+                        overflow: 'hidden',
+                        marginBottom: 16,
+                        position: 'relative',
+                        background: `${m.color}0d`,
+                        border: `1px solid ${m.color}22`,
+                        flexShrink: 0,
+                      }}
+                    >
+                      {m.photo ? (
+                        <>
+                          <img
+                            src={m.photo}
+                            alt={m.name}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              objectPosition: 'center top',
+                              display: 'block',
+                            }}
+                          />
+                          {/* Gradient overlay — blends photo into dark card bg */}
+                          <div
+                            aria-hidden="true"
+                            style={{
+                              position: 'absolute',
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              height: '55%',
+                              background: 'linear-gradient(to bottom, transparent, rgba(8,5,10,0.88))',
+                              pointerEvents: 'none',
+                            }}
+                          />
+                          {/* Subtle color tint on sides */}
+                          <div
+                            aria-hidden="true"
+                            style={{
+                              position: 'absolute',
+                              inset: 0,
+                              background: `linear-gradient(135deg, ${m.color}12 0%, transparent 60%)`,
+                              pointerEvents: 'none',
+                            }}
+                          />
+                        </>
+                      ) : (
+                        /* Placeholder for members without a photo */
+                        <div
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 10,
+                            background: `linear-gradient(135deg, ${m.color}0f 0%, transparent 100%)`,
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: 60,
+                              height: 60,
+                              borderRadius: '50%',
+                              border: `1px solid ${m.color}44`,
+                              background: `${m.color}18`,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: 26,
+                              fontFamily: "'Bebas Neue', sans-serif",
+                              color: `${m.color}99`,
+                              letterSpacing: 2,
+                            }}
+                          >
+                            {m.name[0]}
+                          </div>
+                          <div
+                            style={{
+                              fontSize: 9,
+                              letterSpacing: '3px',
+                              color: 'rgba(255,255,255,0.18)',
+                              fontWeight: 700,
+                            }}
+                          >
+                            NO PHOTO
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   <div
                     style={{
                       fontSize: 12,

@@ -234,6 +234,22 @@ export default function Members() {
         >
           ASDF Band &middot; {members.length} Members
         </div>
+        <div
+          style={
+            titleIn
+              ? {
+                  animation: `fadeInUp 0.8s ${E} 160ms both`,
+                  marginTop: 10,
+                  fontSize: 13,
+                  color: 'rgba(255,255,255,0.4)',
+                  fontFamily: "'Noto Sans KR', sans-serif",
+                  letterSpacing: '0.5px',
+                }
+              : { opacity: 0 }
+          }
+        >
+          멤버를 선택하면 응원 메시지를 남길 수 있어요
+        </div>
       </div>
 
       <div

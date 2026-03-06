@@ -415,7 +415,7 @@ export default function Members() {
                               width: '100%',
                               height: '100%',
                               objectFit: 'cover',
-                              objectPosition: 'center top',
+                              objectPosition: 'center 33%',
                               display: 'block',
                             }}
                           />

@@ -87,7 +87,6 @@ export const members = [
     color: '#20B2AA',
     desc: 'grep -r "완벽한 리프" . — 항상 매칭',
     photo: '/박정호.jpg',
-    absent: true,
   },
   {
     name: '박규민',

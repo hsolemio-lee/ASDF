@@ -426,6 +426,21 @@ export default function Setlist({ memberPreview }) {
         )}
       </div>
 
+      {/* 세션 정보 클릭 가이드 — 잠금 해제 시에만 표시 */}
+      {isViewable && (
+        <div
+          style={{
+            textAlign: 'right',
+            marginBottom: 10,
+            fontSize: 11,
+            letterSpacing: '0.5px',
+            color: 'rgba(255,255,255,0.25)',
+          }}
+        >
+          &#9432;&nbsp; 곡 제목을 탭하면 세션 정보를 볼 수 있어요
+        </div>
+      )}
+
       <div ref={listRef} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         {items.map((item, idx) => {
           if (item.type === 'header') {

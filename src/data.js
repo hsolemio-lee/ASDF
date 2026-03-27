@@ -89,14 +89,6 @@ export const members = [
     photo: '/박정호.jpg',
   },
   {
-    name: '박규민',
-    nickname: 'REBOOT',
-    role: '보컬 · 드럼',
-    color: '#FF6B6B',
-    desc: '막내지만 비트는 제일 세다 — youngest.exe',
-    absent: true,
-  },
-  {
     name: '차지민',
     nickname: 'INTERRUPT',
     role: '바이올린',

@@ -178,7 +178,7 @@ function MemberCheers({ member, onClose }) {
   )
 }
 
-export default function Members() {
+export default function Members({ memberPreview }) {
   const [titleRef, titleIn] = useInView()
   const [gridRef, gridIn] = useInView()
 
@@ -212,7 +212,7 @@ export default function Members() {
   }, [activate, deactivate])
 
   function handleCardClick(i) {
-    if (members[i].secret) return
+    if (members[i].secret && !memberPreview) return
     setExpandedIdx(prev => prev === i ? null : i)
   }
 
@@ -265,7 +265,7 @@ export default function Members() {
           const isGlow = glowSet.has(i)
           const isHover = hoverIdx === i
           const isExpanded = expandedIdx === i
-          const canExpand = !m.secret
+          const canExpand = !m.secret || memberPreview
 
           return (
             <div
@@ -501,7 +501,7 @@ export default function Members() {
                       marginBottom: 8,
                     }}
                   >
-                    {m.secret ? '??????' : m.role}
+                    {m.secret && !memberPreview ? '??????' : m.role}
                   </div>
 
                   <div
@@ -512,14 +512,14 @@ export default function Members() {
                       color: '#FFFFFF',
                       lineHeight: 1.1,
                       marginBottom: 4,
-                      filter: m.secret ? 'blur(8px)' : undefined,
-                      userSelect: m.secret ? 'none' : undefined,
+                      filter: m.secret && !memberPreview ? 'blur(8px)' : undefined,
+                      userSelect: m.secret && !memberPreview ? 'none' : undefined,
                     }}
                   >
                     {m.nickname}
                   </div>
 
-                  {!m.secret && (
+                  {(!m.secret || memberPreview) && (
                     <div
                       style={{
                         fontSize: 14,
@@ -540,8 +540,8 @@ export default function Members() {
                       color: 'rgba(255,255,255,0.45)',
                       fontStyle: 'italic',
                       fontFamily: "'Noto Sans KR', sans-serif",
-                      filter: m.secret ? 'blur(6px)' : undefined,
-                      userSelect: m.secret ? 'none' : undefined,
+                      filter: m.secret && !memberPreview ? 'blur(6px)' : undefined,
+                      userSelect: m.secret && !memberPreview ? 'none' : undefined,
                     }}
                   >
                     {m.desc}
@@ -560,7 +560,7 @@ export default function Members() {
               </div>
 
               {/* Secret overlay */}
-              {m.secret && (
+              {m.secret && !memberPreview && (
                 <div
                   style={{
                     position: 'absolute',

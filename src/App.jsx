@@ -16,7 +16,7 @@ export default function App() {
     <main style={{ overflowX: 'hidden' }}>
       <Hero onMemberPreview={handleMemberPreview} memberPreview={memberPreview} />
       <Setlist memberPreview={memberPreview} />
-      <Members />
+      <Members memberPreview={memberPreview} />
       <Venue />
       <Comments />
     </main>

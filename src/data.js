@@ -118,8 +118,8 @@ export const setlist = [
     session: [
       { role: '보컬',    members: ['이한솔'] },
       { role: '기타',    members: ['최철호'] },
-      { role: '키보드',  members: ['정현석', '고우리'] },
       { role: '베이스',  members: ['김현민'] },
+      { role: '키보드',  members: ['정현석'] },
       { role: '드럼',    members: ['박정재'] },
       { role: '바이올린', members: ['차지민'] },
     ],
@@ -130,11 +130,11 @@ export const setlist = [
     part: '2부',
     tag: '',
     session: [
-      { role: '보컬',     members: ['김정용', '고우리'] },
-      { role: '기타 1·2', members: ['최철호', '이한솔'] },
-      { role: '키보드',   members: ['정현석'] },
-      { role: '베이스',   members: ['김현민'] },
-      { role: '드럼',     members: ['박정재'] },
+      { role: '보컬',      members: ['김정용', '고우리'] },
+      { role: '기타 1·2',  members: ['최철호', '이한솔'] },
+      { role: '베이스',    members: ['김현민'] },
+      { role: '키보드 1·2', members: ['정현석', '고우리'] },
+      { role: '드럼',      members: ['박정재'] },
     ],
   },
 ]

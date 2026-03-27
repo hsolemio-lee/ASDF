@@ -30,6 +30,7 @@ function SessionModal({ track, onClose }) {
           WebkitBackdropFilter: 'blur(5px)',
         }}
       />
+      {/* 센터링 래퍼 — transform으로 인한 animation 충돌 방지 */}
       <div
         style={{
           position: 'fixed',
@@ -37,6 +38,10 @@ function SessionModal({ track, onClose }) {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           zIndex: 201,
+        }}
+      >
+      <div
+        style={{
           background: '#0d0812',
           border: '1px solid rgba(255,140,0,0.35)',
           borderRadius: 14,
@@ -44,6 +49,7 @@ function SessionModal({ track, onClose }) {
           width: 'min(440px, 88vw)',
           boxShadow: '0 0 50px rgba(255,140,0,0.12), 0 8px 48px rgba(0,0,0,0.85)',
           animation: `fadeInScale 0.25s ${E} both`,
+          position: 'relative',
         }}
       >
         {/* 닫기 버튼 */}
@@ -144,6 +150,7 @@ function SessionModal({ track, onClose }) {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </>
   )

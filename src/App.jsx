@@ -6,12 +6,9 @@ import Venue from './components/Venue'
 import Comments from './components/Comments'
 
 export default function App() {
-  const [memberPreview, setMemberPreview] = useState(
-    () => localStorage.getItem('asdf_member_preview') === '1'
-  )
+  const [memberPreview, setMemberPreview] = useState(false)
 
   function handleMemberPreview() {
-    localStorage.setItem('asdf_member_preview', '1')
     setMemberPreview(true)
   }
 

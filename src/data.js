@@ -11,16 +11,105 @@ export const concert = {
 }
 
 export const setlist = [
-  { no: 1,  title: 'Hello, World!',           tag: '오프닝' },
-  { no: 2,  title: 'Stack Overflow',           tag: '' },
-  { no: 3,  title: 'Git Push (My Heart)',      tag: '' },
-  { no: 4,  title: '404 (사랑을 찾지 못했어)', tag: '' },
-  { no: 5,  title: 'Infinite Loop',            tag: '' },
-  { no: 6,  title: 'Debug Night',              tag: '' },
-  { no: 7,  title: 'Null Pointer',             tag: '' },
-  { no: 8,  title: 'Runtime Error',            tag: '' },
-  { no: 9,  title: 'Ctrl+Alt+Del',             tag: '타이틀곡' },
-  { no: 10, title: 'ASDF',                     tag: '앙코르' },
+  {
+    no: 1,
+    title: '버터플라이',
+    part: '1부',
+    tag: '',
+    session: [
+      { role: '보컬',      members: ['고우리', '김정용'] },
+      { role: '기타 1·2',  members: ['최철호', '이한솔'] },
+      { role: '베이스',    members: ['김현민'] },
+      { role: '키보드 1·2', members: ['정현석', '고우리'] },
+      { role: '드럼',      members: ['박정재'] },
+    ],
+  },
+  {
+    no: 2,
+    title: '나는나비',
+    part: '1부',
+    tag: '',
+    session: [
+      { role: '보컬',     members: ['김정용'] },
+      { role: '기타 1·2', members: ['최철호', '이한솔'] },
+      { role: '베이스',   members: ['김현민'] },
+      { role: '키보드',   members: ['정현석'] },
+      { role: '드럼',     members: ['박정재'] },
+    ],
+  },
+  {
+    no: 3,
+    title: 'Love Poem',
+    part: '1부',
+    tag: '',
+    session: [
+      { role: '보컬 · 키보드', members: ['고우리'] },
+      { role: '기타 1·2',     members: ['최철호', '이한솔'] },
+      { role: '베이스',        members: ['김현민'] },
+      { role: '드럼',          members: ['박정재'] },
+    ],
+  },
+  {
+    no: 4,
+    title: 'Creep',
+    part: '1부',
+    tag: '',
+    session: [
+      { role: '보컬',     members: ['김정용'] },
+      { role: '기타 1·2', members: ['최철호', '이한솔'] },
+      { role: '베이스',   members: ['고우리'] },
+      { role: '드럼',     members: ['박정재'] },
+    ],
+  },
+  {
+    no: 5,
+    title: '말하는대로',
+    part: '1부',
+    tag: '',
+    session: [
+      { role: '보컬',   members: ['정현석', '이한솔'] },
+      { role: '키보드', members: ['고우리'] },
+      { role: '드럼',   members: ['박정재'] },
+    ],
+  },
+  {
+    no: 6,
+    title: "60's cardin",
+    part: '2부',
+    tag: '',
+    session: [
+      { role: '보컬',      members: ['김정용'] },
+      { role: '기타',      members: ['박정호'] },
+      { role: '베이스',    members: ['김현민'] },
+      { role: '키보드 1·2', members: ['정현석', '고우리'] },
+      { role: '드럼',      members: ['박정재'] },
+    ],
+  },
+  {
+    no: 7,
+    title: '마흔다섯 마흔하나',
+    part: '2부',
+    tag: '',
+    session: [
+      { role: '보컬 · 키보드', members: ['고우리'] },
+      { role: '기타 1·2',     members: ['이한솔', '최철호'] },
+      { role: '베이스',        members: ['김현민'] },
+      { role: '키보드',        members: ['정현석'] },
+      { role: '드럼',          members: ['박정재'] },
+    ],
+  },
+  {
+    no: 8,
+    title: "It's my life",
+    part: '2부',
+    tag: '',
+    session: [
+      { role: '보컬',     members: ['김정용'] },
+      { role: '기타 1·2', members: ['최철호', '이한솔'] },
+      { role: '베이스',   members: ['고우리'] },
+      { role: '키보드',   members: ['정현석'] },
+    ],
+  },
 ]
 
 export const members = [
